@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
+
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
@@ -47,7 +48,7 @@ const Home: NextPage = () => {
           >
             <h2>Deploy &rarr;</h2>
             <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
+              Hello world
             </p>
           </a>
         </div>
