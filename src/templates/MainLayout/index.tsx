@@ -14,7 +14,7 @@ const MainLayout: React.FC = ({ children }) => {
             </div>
             <DefaultFooter />
         </div>
-    )
-}
+    );
+};
 
 export default MainLayout;

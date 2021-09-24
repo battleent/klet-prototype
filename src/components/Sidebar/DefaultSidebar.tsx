@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 const DefaultSidebar: React.FC = () => {
     return (
@@ -6,7 +6,7 @@ const DefaultSidebar: React.FC = () => {
             <Link href="/">LCK Do Dive Sidebar</Link>
             <Link href="/login">로그인</Link>
         </div>
-    )
-}
+    );
+};
 
 export default DefaultSidebar;
