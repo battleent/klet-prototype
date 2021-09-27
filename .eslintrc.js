@@ -18,10 +18,7 @@ module.exports = {
     'no-alert': 'warn',
     // Best Practices
     eqeqeq: 'error',
-    'no-else-return': ['error',
-      { allowElseIf: false
-      }
-    ],
+    'no-else-return': ['error', { allowElseIf: false }],
     yoda: 'error',
     // Variables
     'no-shadow': 'error',
@@ -44,8 +41,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        moduleDirectory: ['node_modules', 'src/'
-        ],
+        moduleDirectory: ['node_modules', 'src/'],
       },
     },
   },
