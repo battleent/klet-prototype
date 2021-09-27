@@ -1,6 +1,11 @@
+import Link from 'next/link'
+
 const DefaultHeader: React.FC = () => {
     return (
-        <div>헤더 Header</div>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Link href="/">LCK Do Dive Header</Link>
+            <Link href="/login">로그인</Link>
+        </div>
     )
 }
 
