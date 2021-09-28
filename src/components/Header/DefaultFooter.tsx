@@ -1,6 +1,6 @@
 const DefaultFooter: React.FC = () => {
     return (
-        <div>푸터 Footer</div>
+        <div style={{ borderTop: '1px solid gray', height: '50px' }}>푸터 Footer</div>
     )
 }
 

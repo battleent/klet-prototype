@@ -1,15 +1,14 @@
-import DefaultHeader from "@/components/Header/DefaultHeader";
-import DefaultFooter from "@/components/Header/DefaultFooter";
+import { useRouter } from 'next/router';
+
+import MainLayout from '@/templates/MainLayout';
+import SidebarLayout from '@/templates/SidebarLayout';
 
 const DefaultLayout: React.FC = ({ children }) => {
+    const router = useRouter();
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-            <DefaultHeader />
-            <div style={{ flex: '1' }}>
-            {children}
-            </div>
-            <DefaultFooter />
-        </div>
+       <>
+       {router.asPath === '/login' ? <SidebarLayout>{children}</SidebarLayout> : <MainLayout>{children}</MainLayout>}
+       </>
     )
 }
 
