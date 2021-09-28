@@ -1,2 +1,3 @@
 # LCK DO DIVE WEB PROTOTYPE
+
 LCK DO DIVE(가제) 서비스 프로토타입입니다.
