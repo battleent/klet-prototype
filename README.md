@@ -1,3 +1,3 @@
-# LCK DO DIVE WEB PROTOTYPE
+# NFT PLATFORM PROTOTYPE
 
-LCK DO DIVE(가제) 서비스 프로토타입입니다.
+NFT를 관리하는 통합 멤버십 서비스의 프로토타입입니다.
