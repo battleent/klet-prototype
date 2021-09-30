@@ -1,11 +1,24 @@
 import styled from 'styled-components';
+
 import Flex, { Column } from '@/components/Flex';
 import Grid from '@/components/Grid';
+
+import useMedia from '@/hooks/useMedia';
 
 const Item = styled.div`
   display: flex;
   justify-content: center;
-  padding: 0.5rem;
+  padding: 10px;
+`;
+
+const TabFlex = styled(Flex)`
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+  }
+`;
+
+const Tab = styled(Flex)`
+  justify-content: space-around;
 `;
 
 const cardData = [
@@ -21,19 +34,27 @@ const cardData = [
 ];
 
 const User: React.FC = () => {
+  const isDesktop = useMedia('desktop');
   return (
     <Column>
+      <Tab>
+        <div>전체</div>
+        <div>서비스명 #1</div>
+        <div>서비스명 #2</div>
+      </Tab>
+      {!isDesktop && <input placeholder="검색" />}
+
       <div>183개 카드</div>
-      <Flex>
-        <input placeholder="검색" />
+      <TabFlex>
+        {isDesktop && <input placeholder="검색" />}
         <Flex>
-          <span>NFT 등급</span>
+          <span style={{ marginRight: '10px' }}>NFT 등급</span>
           <span>최신순부터</span>
         </Flex>
-      </Flex>
+      </TabFlex>
       <Grid>
         {cardData.map((card) => (
-          <Item>{card.text}</Item>
+          <Item key={card.id}>{card.text}</Item>
         ))}
       </Grid>
     </Column>
