@@ -33,7 +33,7 @@ const cardData = [
   { id: 9, text: '룰러' },
 ];
 
-const My: React.FC = () => {
+const Nft: React.FC = () => {
   const isDesktop = useMedia('desktop');
   return (
     <Column>
@@ -61,4 +61,4 @@ const My: React.FC = () => {
   );
 };
 
-export default My;
+export default Nft;
