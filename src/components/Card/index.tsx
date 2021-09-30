@@ -1,21 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
-type CardProps = {
+interface CardProps {
   tagName: string;
   name: string;
   serviceName: string;
   number: number;
   issuedNumber: number;
-};
+}
 
-const Card = ({
+const Card: React.VFC<CardProps> = ({
   tagName,
   name,
   serviceName,
   number,
   issuedNumber,
-}: CardProps) => {
+}) => {
   return (
     <CardBox>
       <PhotoBox>
