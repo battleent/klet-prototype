@@ -33,7 +33,7 @@ const cardData = [
   { id: 9, text: '룰러' },
 ];
 
-const User: React.FC = () => {
+const My: React.FC = () => {
   const isDesktop = useMedia('desktop');
   return (
     <Column>
@@ -61,4 +61,4 @@ const User: React.FC = () => {
   );
 };
 
-export default User;
+export default My;
