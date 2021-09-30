@@ -1,29 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// type Data = {
-//   name: string;
-//   serviceName: string;
-//   number: number;
-//   issuedNumber: number;
-// };
+type CardProps = {
+  tagName: string;
+  name: string;
+  serviceName: string;
+  number: number;
+  issuedNumber: number;
+};
 
-const Card = () => {
+const Card = ({
+  tagName,
+  name,
+  serviceName,
+  number,
+  issuedNumber,
+}: CardProps) => {
   return (
     <CardBox>
       <PhotoBox>
-        <TagBlock>COMMON</TagBlock>
+        <TagBlock>{tagName}</TagBlock>
       </PhotoBox>
       <ContentBox>
-        <NameBlock>The Next Level</NameBlock>
-        <ServiceNameBlock>서비스명</ServiceNameBlock>
+        <NameBlock>{name}</NameBlock>
+        <ServiceNameBlock>{serviceName}</ServiceNameBlock>
         <NumberBlock>
-          <Number>#4240 </Number>
-          <IssuedNumber>100,241개 발행</IssuedNumber>
+          <Number>#{number} </Number>
+          <IssuedNumber>{issuedNumber}개 발행</IssuedNumber>
         </NumberBlock>
       </ContentBox>
     </CardBox>
   );
+};
+
+Card.defaultProps = {
+  tagName: 'COMMON',
+  name: 'The next level',
+  serviceName: '서비스명',
+  number: 4240,
+  issuedNumber: 100241,
 };
 
 export default Card;
