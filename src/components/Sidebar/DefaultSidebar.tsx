@@ -7,7 +7,8 @@ const DefaultSidebar: React.FC = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-around',
-        borderRight: '1px solid gray',
+        borderRight: '1px solid #EBEBEB',
+        width: '244px',
       }}
     >
       <Link href="/">LCK Do Dive Sidebar</Link>
