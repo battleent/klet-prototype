@@ -5,7 +5,8 @@
     "build": "next build",
     "start": "next start",
     "prepare": "husky install",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "pre-push": "tsc"
   },
   "dependencies": {
     "next": "11.1.2",
@@ -25,12 +26,6 @@
     "lint-staged": "^11.1.2",
     "prettier": "2.4.1",
     "typescript": "4.4.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged --no-stash",
-      "pre-push": "tsc"
-    }
   },
   "lint-staged": {
     "*.js,jsx,ts,tsx": [
