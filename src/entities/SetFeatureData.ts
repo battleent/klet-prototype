@@ -1,6 +1,6 @@
 export default interface SetFeatureData {
-    id: number;
-    setUID: number;
-    featureDataUID: number;
-    featureDataValue?: string;
+    uid: number;
+    setUid: number;
+    featureDataUid: number;
+    featureValue?: string;
 }

@@ -1,7 +1,7 @@
 export default interface SetFeatureData {
-    featureDataUID: number;
-    NFTTypeUID: number;
+    featureDataUid: number;
+    nftTypeUid: number;
     featureDataTitle: string;
     priority: number;
-    isExposed?: boolean;
+    isExposed: boolean;
 }

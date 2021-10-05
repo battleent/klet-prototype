@@ -1,5 +1,5 @@
 export default interface Type {
-    typeUID: number;
+    typeUid: number;
     typeName: string;
     serviecNumber: number;
 }

@@ -1,10 +1,12 @@
 export default interface NFTSet {
-    NFTSetUID?: number;
-    serviceNumber?: number;
-    NFTSetName?: string;
-    NFTSetExplanation?: string;
-    NFTTypeUID?: number;
-    NFTGradeUID?: number;
-    canSendNFT?: boolean;
+    nftSetUid: number;
+    serviceNumber: number;
+    nftSetName: string;
+    nftSetImage: string;
+    nftSetExplanation?: string;
+    nftTypeUid: number;
+    nftGradeUid?: number;
+    canSendNft: boolean;
     url?: string;
+    status: 'ONGOING' | 'FINISHED';
 }
