@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 import Flex, { Column } from '@/components/Flex';
@@ -92,78 +94,120 @@ const cardData = [
 ];
 
 const Nft: React.FC = () => {
+  const { handleSubmit, register, reset } = useForm();
+  const router = useRouter();
   const isDesktop = useMedia('desktop');
+
   const [menu, setMenu] = useState({ level: false, recent: false });
+  const [showCard, setShowCard] = useState(cardData);
+  const [sortLevel, setSortLevel] = useState<string>();
+
+  const { search } = router.query;
   const ntfLevel = cardData.filter(
     (item, index) => cardData.indexOf(item) === index
   );
 
+  useEffect(() => {
+    if (search && sortLevel) {
+      return setShowCard(
+        cardData.filter(
+          (card) =>
+            card.name === (search as String) && card.tagName === sortLevel
+        )
+      );
+    }
+    if (search) {
+      return setShowCard(
+        cardData.filter((card) => card.name === (search as String))
+      );
+    }
+    if (sortLevel) {
+      return setShowCard(cardData.filter((card) => card.tagName === sortLevel));
+    }
+    return setShowCard(cardData);
+  }, [search, sortLevel, cardData]);
+
+  const onSubmit = (formData: { search: string }) => {
+    const searchQuery = formData.search?.trim();
+    if (!searchQuery) {
+      alert('검색어를 입력해주세요');
+      reset({ search: '' });
+      return;
+    }
+
+    router.push(`/nft?search=${encodeURIComponent(searchQuery)}`);
+  };
+
   return (
     <Column>
-      {!isDesktop && (
-        <>
-          <Tab>
-            <div>전체</div>
-            <div>서비스명 #1</div>
-            <div>서비스명 #2</div>
-          </Tab>
-          <input placeholder="검색" />
-        </>
-      )}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {!isDesktop && (
+          <>
+            <Tab>
+              <div>전체</div>
+              <div>서비스명 #1</div>
+              <div>서비스명 #2</div>
+            </Tab>
+            <input type="search" placeholder="검색" {...register('search')} />
+          </>
+        )}
 
-      <div>{cardData.length}개 카드</div>
-      <TabFlex>
-        {isDesktop && <input placeholder="검색" />}
-        <Flex>
-          <span
-            style={{ marginRight: '10px' }}
-            onClick={() =>
-              setMenu((defaultMenu) => ({
-                ...defaultMenu,
-                level: !defaultMenu.level,
-              }))
-            }
-          >
-            NFT 등급
-          </span>
-          <span
-            onClick={() =>
-              setMenu((defaultMenu) => ({
-                ...defaultMenu,
-                recent: !defaultMenu.recent,
-              }))
-            }
-          >
-            최신순부터
-          </span>
-        </Flex>
-        {menu.level && (
-          <DropDown right="100px">
-            {ntfLevel.map((card) => (
-              <div>{card.tagName}</div>
-            ))}
-          </DropDown>
-        )}
-        {menu.recent && (
-          <DropDown>
-            {sortOption.map((option) => (
-              <div>{option.text}</div>
-            ))}
-          </DropDown>
-        )}
-      </TabFlex>
-      <Grid>
-        {cardData.map((card) => (
-          <Card
-            key={card.id}
-            tagName={card.tagName}
-            name={card.name}
-            serviceName={card.serviceName}
-            number={card.number}
-            issuedNumber={card.issuedNumber}
-          />
-        ))}
-      </Grid>
+        <div>{cardData.length}개 카드</div>
+        <TabFlex>
+          {isDesktop && <input placeholder="검색" {...register('search')} />}
+          <Flex>
+            <span
+              style={{ marginRight: '10px' }}
+              onClick={() =>
+                setMenu((defaultMenu) => ({
+                  ...defaultMenu,
+                  level: !defaultMenu.level,
+                }))
+              }
+            >
+              NFT 등급
+            </span>
+            <span
+              onClick={() =>
+                setMenu((defaultMenu) => ({
+                  ...defaultMenu,
+                  recent: !defaultMenu.recent,
+                }))
+              }
+            >
+              최신순부터
+            </span>
+          </Flex>
+          {menu.level && (
+            <DropDown right="100px">
+              {ntfLevel.map((card) => (
+                <div key={card.id} onClick={() => setSortLevel(card.tagName)}>
+                  {card.tagName}
+                </div>
+              ))}
+            </DropDown>
+          )}
+          {menu.recent && (
+            <DropDown>
+              {sortOption.map((option) => (
+                <div key={option.id}>{option.text}</div>
+              ))}
+            </DropDown>
+          )}
+        </TabFlex>
+        <Grid>
+          {showCard.map((card) => (
+            <Card
+              key={card.id}
+              tagName={card.tagName}
+              name={card.name}
+              serviceName={card.serviceName}
+              number={card.number}
+              issuedNumber={card.issuedNumber}
+            />
+          ))}
+        </Grid>
+      </form>
     </Column>
   );
 };
