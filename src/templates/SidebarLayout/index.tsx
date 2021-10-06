@@ -1,13 +1,16 @@
+import DefaultHeader from '@/components/Header/DefaultHeader';
 import DefaultSidebar from '@/components/Sidebar/DefaultSidebar';
-import DefaultFooter from '@/components/Header/DefaultFooter';
+
+import useMedia from '@/hooks/useMedia';
 
 const SidebarLayout: React.FC = ({ children }) => {
+  const isDesktop = useMedia('desktop');
   return (
-    <div style={{ display: 'flex', height: '100%' }}>
-      <DefaultSidebar />
-      <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-        <div style={{ flex: '1' }}>{children}</div>
-        <DefaultFooter />
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      <DefaultHeader />
+      <div style={{ display: 'flex', flex: 1 }}>
+        {isDesktop && <DefaultSidebar />}
+        <div style={{ width: '100%' }}>{children}</div>
       </div>
     </div>
   );

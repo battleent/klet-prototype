@@ -7,7 +7,7 @@ const DefaultLayout: React.FC = ({ children }) => {
   const router = useRouter();
   return (
     <>
-      {router.asPath === '/login' ? (
+      {router.asPath === '/nft' ? (
         <SidebarLayout>{children}</SidebarLayout>
       ) : (
         <MainLayout>{children}</MainLayout>
