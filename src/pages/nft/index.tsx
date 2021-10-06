@@ -94,7 +94,7 @@ const cardData = [
 ];
 
 const Nft: React.FC = () => {
-  const { handleSubmit, register, reset } = useForm();
+  const { handleSubmit, register } = useForm();
   const router = useRouter();
   const isDesktop = useMedia('desktop');
 
@@ -129,18 +129,13 @@ const Nft: React.FC = () => {
 
   const onSubmit = (formData: { search: string }) => {
     const searchQuery = formData.search?.trim();
-    if (!searchQuery) {
-      alert('검색어를 입력해주세요');
-      reset({ search: '' });
-      return;
-    }
 
     router.push(`/nft?search=${encodeURIComponent(searchQuery)}`);
   };
 
   return (
     <Column>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onChange={handleSubmit(onSubmit)}>
         {!isDesktop && (
           <>
             <Tab>
