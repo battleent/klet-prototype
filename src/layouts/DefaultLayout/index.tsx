@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
 
-import MainLayout from '@/templates/MainLayout';
-import SidebarLayout from '@/templates/SidebarLayout';
+import MainLayout from '@/layouts/MainLayout';
+import CompactLayout from '@/layouts/CompactLayout';
 
 const DefaultLayout: React.FC = ({ children }) => {
   const router = useRouter();
   return (
     <>
       {router.asPath === '/login' ? (
-        <SidebarLayout>{children}</SidebarLayout>
+        <CompactLayout>{children}</CompactLayout>
       ) : (
         <MainLayout>{children}</MainLayout>
       )}
