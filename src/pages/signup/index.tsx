@@ -29,7 +29,7 @@ const Signup: React.FC = () => {
             {...register('date')}
           />
           <input
-            placeholder="아아디"
+            placeholder="아이디"
             style={{ width: '150px' }}
             {...register('id')}
           />

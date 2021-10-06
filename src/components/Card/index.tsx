@@ -1,47 +1,14 @@
-import React from 'react';
 import styled from 'styled-components';
+import NFTGrade from '@/entities/NFTGrade';
+import NFTSet from '@/entities/NFTSet';
 
 interface CardProps {
-  tagName: string;
-  name: string;
+  tagName: NFTGrade;
+  name: NFTSet;
   serviceName: string;
-  number: number;
+  number: NFTSet;
   issuedNumber: number;
 }
-
-const Card: React.VFC<CardProps> = ({
-  tagName,
-  name,
-  serviceName,
-  number,
-  issuedNumber,
-}) => {
-  return (
-    <CardBox>
-      <PhotoBox>
-        <TagBlock>{tagName}</TagBlock>
-      </PhotoBox>
-      <ContentBox>
-        <NameBlock>{name}</NameBlock>
-        <ServiceNameBlock>{serviceName}</ServiceNameBlock>
-        <NumberBlock>
-          <Number>#{number} </Number>
-          <IssuedNumber>{issuedNumber}개 발행</IssuedNumber>
-        </NumberBlock>
-      </ContentBox>
-    </CardBox>
-  );
-};
-
-Card.defaultProps = {
-  tagName: 'COMMON',
-  name: 'The next level',
-  serviceName: '서비스명',
-  number: 4240,
-  issuedNumber: 100241,
-};
-
-export default Card;
 
 const CardBox = styled.div`
   display: inline-block;
@@ -104,3 +71,37 @@ const IssuedNumber = styled.div`
   height: 20px;
   font-size: 13px;
 `;
+
+const Card: React.VFC<CardProps> = ({
+  tagName,
+  name,
+  serviceName,
+  number,
+  issuedNumber,
+}) => {
+  return (
+    <CardBox>
+      <PhotoBox>
+        <TagBlock>{tagName.gradeName}</TagBlock>
+      </PhotoBox>
+      <ContentBox>
+        <NameBlock>{name.nftSetName}</NameBlock>
+        <ServiceNameBlock>{serviceName}</ServiceNameBlock>
+        <NumberBlock>
+          <Number>#{number.serviceNumber} </Number>
+          <IssuedNumber>{issuedNumber}개 발행</IssuedNumber>
+        </NumberBlock>
+      </ContentBox>
+    </CardBox>
+  );
+};
+
+Card.defaultProps = {
+  // tagName: 'COMMON',
+  // name: 'The next level',
+  serviceName: '서비스명',
+  // number: 4240,
+  issuedNumber: 100241,
+};
+
+export default Card;
