@@ -18,7 +18,7 @@ const DefaultHeader: React.FC = () => {
           height: '100%',
         }}
       >
-        <Link href="/">LCK Do Dive Header</Link>
+        <Link href="/">NFT Platform</Link>
         <Link href="/login">로그인</Link>
       </div>
     </div>
