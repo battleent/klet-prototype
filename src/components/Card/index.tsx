@@ -61,7 +61,6 @@ const PhotoBox = styled.div`
 const ContentBox = styled.div`
   width: 197px;
   height: 86px;
-  background-color: #c4c4c4;
   margin-top: 20px;
 `;
 
