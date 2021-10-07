@@ -1,4 +1,4 @@
-import type { AppPropsWithLayout } from '@/pages/types';
+import type { AppPropsWithLayout } from '@/layouts/types';
 
 import GlobalStyle from '@/styles/GlobalStyle';
 import DefaultLayout from '@/layouts/DefaultLayout';

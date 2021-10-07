@@ -1,4 +1,4 @@
-import type { NextPageWithLayout } from '@/pages/types';
+import type { NextPageWithLayout } from '@/layouts/types';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
