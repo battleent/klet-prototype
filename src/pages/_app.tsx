@@ -1,14 +1,18 @@
-import type { AppProps } from 'next/app';
+import type { AppPropsWithLayout } from '@/pages/types';
+
 import GlobalStyle from '@/styles/GlobalStyle';
 import DefaultLayout from '@/layouts/DefaultLayout';
 
-const App: React.FC<AppProps> = ({ Component, pageProps }) => {
-  const ComponentWithLayout = (
-    <DefaultLayout>
+const App: React.FC<AppPropsWithLayout> = ({ Component, pageProps }) => {
+  const getLayout =
+    Component.getLayout ?? ((page) => <DefaultLayout>{page}</DefaultLayout>);
+
+  return (
+    <>
       <GlobalStyle />
-      <Component {...pageProps} />
-    </DefaultLayout>
+      {getLayout(<Component {...pageProps} />)}
+    </>
   );
-  return <>{ComponentWithLayout}</>;
 };
+
 export default App;

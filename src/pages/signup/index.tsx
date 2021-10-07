@@ -1,56 +1,67 @@
+import type { NextPageWithLayout } from '@/pages/types';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
-const Signup: React.FC = () => {
+import { Text } from 'rebass';
+import CompactLayout from '@/layouts/CompactLayout';
+import Input from '@/components/Input';
+import Label from '@/components/Label';
+import Spacer from '@/components/Spacer';
+import Stack from '@/components/Stack';
+import Button from '@/components/Button';
+
+const Signup: NextPageWithLayout = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data: { id: string; password: string }) => {
     console.log(data);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div>회원가입</div>
-      <div style={{ display: 'flex', marginTop: '20px' }}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div style={{ marginTop: '3px' }}>이름</div>
-          <div style={{ marginTop: '3px' }}>생년월일</div>
-          <div style={{ marginTop: '3px' }}>아아디</div>
-          <div style={{ marginTop: '3px' }}>비밀번호</div>
-          <div style={{ marginTop: '3px' }}>이메일</div>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <input
-            placeholder="이름"
-            style={{ width: '150px' }}
-            {...register('name')}
-          />
-          <input
-            type="date"
-            placeholder="생년월일"
-            style={{ width: '150px' }}
-            {...register('date')}
-          />
-          <input
-            placeholder="아이디"
-            style={{ width: '150px' }}
-            {...register('id')}
-          />
-          <input
+      <Text color="#343434" fontSize="32px" fontWeight="bold">
+        회원가입
+      </Text>
+      <Spacer size={24} />
+      <Stack gap={32}>
+        <Stack gap={8}>
+          <Label>아이디</Label>
+          <Input placeholder="아이디" {...register('id')} />
+        </Stack>
+        <Stack gap={8}>
+          <Label>비밀번호</Label>
+          <Input
             type="password"
             placeholder="비밀번호"
-            style={{ width: '150px' }}
             {...register('password')}
           />
-          <input
-            type="email"
-            placeholder="이메일"
-            style={{ width: '150px' }}
-            {...register('email')}
-          />
-        </div>
-      </div>
-
-      <button type="submit">가입하기</button>
+        </Stack>
+        <Stack gap={8}>
+          <Label>이메일</Label>
+          <Input type="email" {...register('email')} />
+        </Stack>
+      </Stack>
+      <Spacer size={48} />
+      <Stack gap={24}>
+        <label>
+          <input type="checkbox" />
+          약관에 동의합니다.
+        </label>
+        <Button type="submit">회원가입</Button>
+        <Link href="/login" passHref>
+          <a
+            style={{
+              color: '#007AFF',
+              textDecoration: 'underline',
+              textAlign: 'center',
+            }}
+          >
+            로그인
+          </a>
+        </Link>
+      </Stack>
     </form>
   );
 };
+
+Signup.getLayout = (page) => <CompactLayout>{page}</CompactLayout>;
 
 export default Signup;

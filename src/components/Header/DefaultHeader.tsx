@@ -2,8 +2,9 @@ import Link from 'next/link';
 
 const DefaultHeader: React.FC = () => {
   return (
-    <div
+    <header
       style={{
+        backgroundColor: 'white',
         borderBottom: '1px solid #E8E8E8',
         height: '80px',
       }}
@@ -21,7 +22,7 @@ const DefaultHeader: React.FC = () => {
         <Link href="/">NFT Platform</Link>
         <Link href="/login">로그인</Link>
       </div>
-    </div>
+    </header>
   );
 };
 

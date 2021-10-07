@@ -69,7 +69,6 @@ const GlobalStyle = createGlobalStyle`
   textarea {
     color: inherit;
     line-height: inherit;
-    appearance: none;
   }
 
   ::placeholder {

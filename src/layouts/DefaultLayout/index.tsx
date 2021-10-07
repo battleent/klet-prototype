@@ -1,18 +1,14 @@
-import { useRouter } from 'next/router';
-
-import MainLayout from '@/layouts/MainLayout';
-import CompactLayout from '@/layouts/CompactLayout';
+import DefaultHeader from '@/components/Header/DefaultHeader';
+import { Flex } from 'rebass';
 
 const DefaultLayout: React.FC = ({ children }) => {
-  const router = useRouter();
   return (
-    <>
-      {router.asPath === '/login' ? (
-        <CompactLayout>{children}</CompactLayout>
-      ) : (
-        <MainLayout>{children}</MainLayout>
-      )}
-    </>
+    <Flex flexDirection="column" height="100%">
+      <DefaultHeader />
+      <Flex as="main" flex={1}>
+        {children}
+      </Flex>
+    </Flex>
   );
 };
 
