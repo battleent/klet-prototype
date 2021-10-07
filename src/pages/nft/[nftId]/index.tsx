@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 import Flex, { Column } from '@/components/Flex';
 
 const TagBlock = styled.div`
@@ -32,7 +33,70 @@ const Grid = styled.div`
   grid-gap: 32px;
 `;
 
+const cardData = [
+  {
+    id: 1,
+    tagName: 'Common',
+    name: 'T1 Faker',
+    serviceName: '1',
+    number: 1,
+    issuedNumber: 13,
+  },
+  {
+    id: 2,
+    tagName: 'Rare',
+    name: 'GenG Clid',
+    serviceName: '2',
+    number: 2,
+    issuedNumber: 22,
+  },
+  {
+    id: 3,
+    tagName: 'Common',
+    name: 'T1 Keria',
+    serviceName: '3',
+    number: 3,
+    issuedNumber: 66,
+  },
+  {
+    id: 4,
+    tagName: 'Common',
+    name: 'DWG ShowMaker',
+    serviceName: '4',
+    number: 4,
+    issuedNumber: 15,
+  },
+  {
+    id: 5,
+    tagName: 'Rare',
+    name: 'GenG Ruler',
+    serviceName: '5',
+    number: 5,
+    issuedNumber: 92,
+  },
+  {
+    id: 6,
+    tagName: 'Common',
+    name: 'DWG Khan',
+    serviceName: '6',
+    number: 6,
+    issuedNumber: 101,
+  },
+  {
+    id: 7,
+    tagName: 'Rare',
+    name: 'HLE Chovy',
+    serviceName: '7',
+    number: 7,
+    issuedNumber: 100,
+  },
+];
+
 const NftItems: React.VFC = () => {
+  const router = useRouter();
+  const { nftId } = router.query;
+  const nftCard = cardData.find((item) => item.id === Number(nftId));
+  console.log(nftCard);
   return (
     <div style={{ width: '972px', margin: 'auto' }}>
       <Flex style={{ marginTop: '72px' }}>
@@ -44,14 +108,20 @@ const NftItems: React.VFC = () => {
             borderRadius: '18px',
           }}
         />
-        <Column style={{ marginLeft: '48px', justifyContent: 'space-between' }}>
-          <TagBlock>Common</TagBlock>
-          <Title>The next statement has become</Title>
-          <div style={{ color: 'gray' }}>서비스명</div>
+        <Column
+          style={{
+            marginLeft: '48px',
+            justifyContent: 'space-between',
+            flex: '1',
+          }}
+        >
+          <TagBlock>{nftCard?.tagName}</TagBlock>
+          <Title>{nftCard?.name}</Title>
+          <div style={{ color: 'gray' }}>{nftCard?.serviceName}</div>
           <Flex style={{ alignItems: 'center', marginTop: '40px' }}>
             <Column>
-              <div style={{ fontSize: '24px' }}>#4240</div>
-              <div>100,241개 발행</div>
+              <div style={{ fontSize: '24px' }}>#{nftCard?.number}</div>
+              <div>{nftCard?.issuedNumber}개 발행</div>
             </Column>
             <Flex style={{ marginLeft: 'auto', alignItems: 'center' }}>
               <div>카드 상세보기</div>

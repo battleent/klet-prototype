@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
@@ -192,14 +193,17 @@ const Nft: React.FC = () => {
         </TabFlex>
         <Grid>
           {showCard.map((card) => (
-            <Card
-              key={card.id}
-              tagName={card.tagName}
-              name={card.name}
-              serviceName={card.serviceName}
-              number={card.number}
-              issuedNumber={card.issuedNumber}
-            />
+            <Link key={card.id} href={`/nft/${card.id}`}>
+              <a>
+                <Card
+                  tagName={card.tagName}
+                  name={card.name}
+                  serviceName={card.serviceName}
+                  number={card.number}
+                  issuedNumber={card.issuedNumber}
+                />
+              </a>
+            </Link>
           ))}
         </Grid>
       </form>
