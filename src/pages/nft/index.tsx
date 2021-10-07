@@ -112,13 +112,13 @@ const Nft: React.FC = () => {
       return setShowCard(
         cardData.filter(
           (card) =>
-            card.name === (search as String) && card.tagName === sortLevel
+            card.name === (search as string) && card.tagName === sortLevel
         )
       );
     }
     if (search) {
       return setShowCard(
-        cardData.filter((card) => card.name === (search as String))
+        cardData.filter((card) => card.name === (search as string))
       );
     }
     if (sortLevel) {

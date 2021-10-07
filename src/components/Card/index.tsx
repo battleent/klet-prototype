@@ -1,12 +1,10 @@
 import styled from 'styled-components';
-import NFTGrade from '@/entities/NFTGrade';
-import NFTSet from '@/entities/NFTSet';
 
 interface CardProps {
-  tagName: NFTGrade;
-  name: NFTSet;
+  tagName: string;
+  name: string;
   serviceName: string;
-  number: NFTSet;
+  number: number;
   issuedNumber: number;
 }
 
@@ -81,13 +79,13 @@ const Card: React.VFC<CardProps> = ({
   return (
     <CardBox>
       <PhotoBox>
-        <TagBlock>{tagName.gradeName}</TagBlock>
+        <TagBlock>{tagName}</TagBlock>
       </PhotoBox>
       <ContentBox>
-        <NameBlock>{name.nftSetName}</NameBlock>
+        <NameBlock>{name}</NameBlock>
         <ServiceNameBlock>{serviceName}</ServiceNameBlock>
         <NumberBlock>
-          <Number>#{number.serviceNumber} </Number>
+          <Number>#{number} </Number>
           <IssuedNumber>{issuedNumber}개 발행</IssuedNumber>
         </NumberBlock>
       </ContentBox>
