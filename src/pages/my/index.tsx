@@ -31,7 +31,7 @@ const My: React.FC = () => {
         <Spacer size={48} />
         <Stack gap={20}>
           <Stack>
-            <Flex>
+            <Flex sx={{ py: '8px' }}>
               <Label>이메일</Label>
               <Text style={{ flex: 1, marginLeft: '30px' }}>
                 lckdodive@battleent.com
