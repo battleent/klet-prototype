@@ -40,9 +40,7 @@ export default class MyDocument extends Document {
   render(): JSX.Element {
     return (
       <Html lang="ko">
-        <Head>
-          <link rel="manifest" href="/manifest.json" />
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />

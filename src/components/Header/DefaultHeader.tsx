@@ -1,27 +1,32 @@
 import Link from 'next/link';
 
+import Wrapper from '@/components/Wrapper';
+
 const DefaultHeader: React.FC = () => {
   return (
-    <div
+    <header
       style={{
+        display: 'flex',
+        alignItems: 'center',
+        backgroundColor: 'white',
         borderBottom: '1px solid #E8E8E8',
         height: '80px',
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          maxWidth: '1180px',
-          margin: '0 auto',
-          height: '100%',
-        }}
-      >
-        <Link href="/">LCK Do Dive Header</Link>
-        <Link href="/login">로그인</Link>
-      </div>
-    </div>
+      <Wrapper>
+        <div
+          style={{
+            display: 'flex',
+            flex: '1',
+            height: '100%',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Link href="/nft">NFT Platform</Link>
+          <Link href="/login">로그인</Link>
+        </div>
+      </Wrapper>
+    </header>
   );
 };
 
