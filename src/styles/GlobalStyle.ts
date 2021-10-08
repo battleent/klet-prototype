@@ -15,18 +15,19 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
   }
   @font-face {
-    font-family: 'SBAggroL';
+    font-family: 'SBAggro';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');
     font-weight: normal;
     font-style: normal;
   }
   @font-face {
-    font-family: 'SBAggroB';
+    font-family: 'SBAggro';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
     font-weight: bold;
     font-style: normal;
   }
 
+  *,
   *::before,
   *::after {
     min-width: 0;

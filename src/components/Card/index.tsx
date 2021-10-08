@@ -10,62 +10,58 @@ interface CardProps {
 
 const CardBox = styled.div`
   display: inline-block;
-  width: 197px;
   height: 350px;
-  margin-right: 28px;
   background-color: #ffffff;
 `;
 
 const PhotoBox = styled.div`
-  width: 197px;
+  position: relative;
   height: 244px;
   background-color: #c4c4c4;
   border-radius: 14px;
 `;
 
 const ContentBox = styled.div`
-  width: 197px;
-  height: 86px;
   margin-top: 20px;
 `;
 
 const TagBlock = styled.div`
-  background-color: #ffffff;
-  width: 70px;
-  height: 20px;
-  border-radius: 24px;
   position: absolute;
+  top: 16px;
+  left: 16px;
   padding: 8px 12px 4px;
+  border-radius: 28px;
+  background-color: #ffffff;
+  color: #999999;
+  font-size: 12px;
+  font-family: 'SBAggro';
 `;
 
 const NameBlock = styled.div`
-  line-height: 2.6rem;
-  width: 197px;
-  height: 26px;
+  margin-bottom: 6px;
+  font-size: 20px;
+  font-weight: bold;
 `;
 
 const ServiceNameBlock = styled.div`
-  line-height: 1.7rem;
-  width: 197px;
-  height: 17px;
+  margin-bottom: 16px;
+  color: #999999;
 `;
 
 const NumberBlock = styled.div`
-  line-height: 1.7rem;
-  width: 197px;
-  height: 21px;
   display: flex;
   flex-direction: row;
+  align-items: center;
 `;
 
 const Number = styled.div`
-  width: 51px;
-  height: 21px;
+  margin-right: 10px;
+  font-size: 16px;
+  font-weight: bold;
 `;
 
 const IssuedNumber = styled.div`
-  width: 100px;
-  height: 20px;
+  color: #999999;
   font-size: 13px;
 `;
 
