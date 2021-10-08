@@ -13,6 +13,10 @@ const Sidebar = styled(Flex)`
   width: 244px;
   padding: 80px 0;
   border-right: 1px solid #ebebeb;
+  @media screen and (max-width: 500px) {
+    padding: 12px 0;
+    border-right: 0 none;
+  }
 `;
 
 const DropDown = styled(Flex)<{ right?: string }>`
@@ -141,7 +145,12 @@ const Nft: React.FC = () => {
             전체
           </Text>
         </Sidebar>
-        <Flex flexDirection={['column']} py="64px" pl={['0', '56px']} flex="1">
+        <Flex
+          flexDirection={['column']}
+          py={['0', '64px']}
+          pl={['0', '56px']}
+          flex="1"
+        >
           <Flex>
             <Input placeholder="검색" onChange={handleSearch} />
             <div style={{ display: 'none ' }}>
