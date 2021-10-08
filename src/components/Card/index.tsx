@@ -9,6 +9,7 @@ interface CardProps {
 }
 
 const CardBox = styled.div`
+  width: 100%;
   display: inline-block;
   height: 350px;
   background-color: #ffffff;
