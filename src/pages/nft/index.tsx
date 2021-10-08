@@ -1,30 +1,37 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import { Flex, Text } from 'rebass';
 
-import Flex, { Column } from '@/components/Flex';
+import Wrapper from '@/components/Wrapper';
+import Spacer from '@/components/Spacer';
 import Grid from '@/components/Grid';
 import Card from '@/components/Card';
 
-import useMedia from '@/hooks/useMedia';
-
-const TabFlex = styled(Flex)`
-  position: relative;
-  justify-content: space-between;
+const Sidebar = styled(Flex)`
+  flex-flow: column;
+  width: 244px;
+  padding: 80px 0;
+  border-right: 1px solid #ebebeb;
   @media screen and (max-width: 500px) {
-    flex-direction: column;
+    padding: 12px 0;
+    border-right: 0 none;
   }
 `;
 
-const Tab = styled(Flex)`
-  justify-content: space-around;
-`;
-
-const DropDown = styled(Column)<{ right?: string }>`
+const DropDown = styled(Flex)<{ right?: string }>`
   position: absolute;
+  flex-flow: column;
   right: ${(props) => (props.right ? props.right : 0)};
   top: 25px;
+`;
+
+const Input = styled.input`
+  padding: 14px 24px;
+  background-color: white;
+  border: 1px solid #cccccc;
+  border-radius: 50px;
+  font-size: 16px;
 `;
 
 const sortOption = [
@@ -37,66 +44,64 @@ const sortOption = [
 const cardData = [
   {
     id: 1,
-    tagName: '1',
+    tagName: 'COMMON',
     name: 'Faker',
-    serviceName: '1',
+    serviceName: 'LCK Do Dive',
     number: 1,
     issuedNumber: 1,
   },
   {
     id: 2,
-    tagName: '2',
+    tagName: 'COMMON',
     name: 'Clid',
-    serviceName: '2',
+    serviceName: 'LCK Do Dive',
     number: 2,
     issuedNumber: 2,
   },
   {
     id: 3,
-    tagName: '3',
+    tagName: 'COMMON',
     name: 'Keria',
-    serviceName: '3',
+    serviceName: 'LCK Do Dive',
     number: 3,
     issuedNumber: 3,
   },
   {
     id: 4,
-    tagName: '4',
+    tagName: 'COMMON',
     name: 'ShowMaker',
-    serviceName: '4',
+    serviceName: 'LCK Do Dive',
     number: 4,
     issuedNumber: 4,
   },
   {
     id: 5,
-    tagName: '5',
+    tagName: 'COMMON',
     name: 'Ruler',
-    serviceName: '5',
+    serviceName: 'LCK Do Dive',
     number: 5,
     issuedNumber: 5,
   },
   {
     id: 6,
-    tagName: '6',
+    tagName: 'COMMON',
     name: 'Khan',
-    serviceName: '6',
+    serviceName: 'LCK Do Dive',
     number: 6,
     issuedNumber: 6,
   },
   {
     id: 7,
-    tagName: '7',
+    tagName: 'COMMON',
     name: 'Chovy',
-    serviceName: '7',
+    serviceName: 'LCK Do Dive',
     number: 7,
     issuedNumber: 7,
   },
 ];
 
 const Nft: React.FC = () => {
-  const { handleSubmit, register } = useForm();
   const router = useRouter();
-  const isDesktop = useMedia('desktop');
 
   const [menu, setMenu] = useState({ level: false, recent: false });
   const [showCard, setShowCard] = useState(cardData);
@@ -107,103 +112,107 @@ const Nft: React.FC = () => {
     (item, index) => cardData.indexOf(item) === index
   );
 
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchQuery = event.target.value.trim();
+
+    router.push(`/nft?search=${encodeURIComponent(searchQuery)}`);
+  };
+
   useEffect(() => {
     if (search && sortLevel) {
       return setShowCard(
         cardData.filter(
-          (card) =>
-            card.name === (search as String) && card.tagName === sortLevel
+          (card) => card.name === search && card.tagName === sortLevel
         )
       );
     }
     if (search) {
       return setShowCard(
-        cardData.filter((card) => card.name === (search as String))
+        cardData.filter((card) => card.name.includes(search as string))
       );
     }
     if (sortLevel) {
       return setShowCard(cardData.filter((card) => card.tagName === sortLevel));
     }
     return setShowCard(cardData);
-  }, [search, sortLevel, cardData]);
-
-  const onSubmit = (formData: { search: string }) => {
-    const searchQuery = formData.search?.trim();
-
-    router.push(`/nft?search=${encodeURIComponent(searchQuery)}`);
-  };
+  }, [search, sortLevel]);
 
   return (
-    <Column>
-      <form onChange={handleSubmit(onSubmit)}>
-        {!isDesktop && (
-          <>
-            <Tab>
-              <div>전체</div>
-              <div>서비스명 #1</div>
-              <div>서비스명 #2</div>
-            </Tab>
-            <input type="search" placeholder="검색" {...register('search')} />
-          </>
-        )}
-
-        <div>{cardData.length}개 카드</div>
-        <TabFlex>
-          {isDesktop && <input placeholder="검색" {...register('search')} />}
+    <Wrapper>
+      <Flex flexDirection={['column', 'row']} flex="1">
+        <Sidebar>
+          <Text fontFamily="SBAggro" fontWeight="bold" fontSize="24px">
+            전체
+          </Text>
+        </Sidebar>
+        <Flex
+          flexDirection={['column']}
+          py={['0', '64px']}
+          pl={['0', '56px']}
+          flex="1"
+        >
           <Flex>
-            <span
-              style={{ marginRight: '10px' }}
-              onClick={() =>
-                setMenu((defaultMenu) => ({
-                  ...defaultMenu,
-                  level: !defaultMenu.level,
-                }))
-              }
-            >
-              NFT 등급
-            </span>
-            <span
-              onClick={() =>
-                setMenu((defaultMenu) => ({
-                  ...defaultMenu,
-                  recent: !defaultMenu.recent,
-                }))
-              }
-            >
-              최신순부터
-            </span>
+            <Input placeholder="검색" onChange={handleSearch} />
+            <div style={{ display: 'none ' }}>
+              <span
+                style={{ marginRight: '10px' }}
+                onClick={() =>
+                  setMenu((defaultMenu) => ({
+                    ...defaultMenu,
+                    level: !defaultMenu.level,
+                  }))
+                }
+              >
+                NFT 등급
+              </span>
+              <span
+                onClick={() =>
+                  setMenu((defaultMenu) => ({
+                    ...defaultMenu,
+                    recent: !defaultMenu.recent,
+                  }))
+                }
+              >
+                최신순부터
+              </span>
+              {menu.level && (
+                <DropDown right="100px">
+                  {ntfLevel.map((card) => (
+                    <div
+                      key={card.id}
+                      onClick={() => setSortLevel(card.tagName)}
+                    >
+                      {card.tagName}
+                    </div>
+                  ))}
+                </DropDown>
+              )}
+              {menu.recent && (
+                <DropDown>
+                  {sortOption.map((option) => (
+                    <div key={option.id}>{option.text}</div>
+                  ))}
+                </DropDown>
+              )}
+            </div>
           </Flex>
-          {menu.level && (
-            <DropDown right="100px">
-              {ntfLevel.map((card) => (
-                <div key={card.id} onClick={() => setSortLevel(card.tagName)}>
-                  {card.tagName}
-                </div>
-              ))}
-            </DropDown>
-          )}
-          {menu.recent && (
-            <DropDown>
-              {sortOption.map((option) => (
-                <div key={option.id}>{option.text}</div>
-              ))}
-            </DropDown>
-          )}
-        </TabFlex>
-        <Grid>
-          {showCard.map((card) => (
-            <Card
-              key={card.id}
-              tagName={card.tagName}
-              name={card.name}
-              serviceName={card.serviceName}
-              number={card.number}
-              issuedNumber={card.issuedNumber}
-            />
-          ))}
-        </Grid>
-      </form>
-    </Column>
+
+          <Spacer size={40} />
+          <Grid>
+            {showCard.map((card) => (
+              <Card
+                key={card.id}
+                tagName={card.tagName}
+                name={card.name}
+                serviceName={card.serviceName}
+                number={card.number}
+                issuedNumber={card.issuedNumber}
+              />
+            ))}
+          </Grid>
+        </Flex>
+      </Flex>
+    </Wrapper>
   );
 };
 

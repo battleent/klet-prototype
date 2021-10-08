@@ -5,7 +5,7 @@ const GridStyle = css`
   flex-wrap: wrap;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
-  grid-gap: 10px;
+  grid-gap: 28px 48px;
   @media screen and (max-width: 500px) {
     grid-template-columns: repeat(1, 1fr);
   }
