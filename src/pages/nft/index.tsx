@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { Flex, Text } from 'rebass';
 
@@ -200,14 +201,18 @@ const Nft: React.FC = () => {
           <Spacer size={40} />
           <Grid>
             {showCard.map((card) => (
-              <Card
-                key={card.id}
-                tagName={card.tagName}
-                name={card.name}
-                serviceName={card.serviceName}
-                number={card.number}
-                issuedNumber={card.issuedNumber}
-              />
+              <Link key={card.id} href={`/nft/${card.id}`}>
+                <a>
+                  <Card
+                    key={card.id}
+                    tagName={card.tagName}
+                    name={card.name}
+                    serviceName={card.serviceName}
+                    number={card.number}
+                    issuedNumber={card.issuedNumber}
+                  />
+                </a>
+              </Link>
             ))}
           </Grid>
         </Flex>
