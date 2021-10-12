@@ -92,6 +92,45 @@ const My: React.FC = () => {
             <Text>0xe3d92072d8b9a59a0427485a1b5f459271df</Text>
           </Flex>
         </Flex>
+        <Flex flexDirection="column" py="40px">
+          <Text color="#343434" fontSize="18px" fontWeight="bold">
+            비밀번호 변경
+          </Text>
+          <Spacer size={16} />
+          <Stack gap={20}>
+            <Stack>
+              <Flex alignItems="center">
+                <Label>기존 비밀번호</Label>
+                <Input
+                  type="password"
+                  style={{ flex: 1, marginLeft: '39px' }}
+                />
+              </Flex>
+            </Stack>
+            <Stack>
+              <Flex alignItems="center">
+                <Label>새 비밀번호</Label>
+                <Input
+                  type="password"
+                  style={{ flex: 1, marginLeft: '52px' }}
+                />
+              </Flex>
+            </Stack>
+            <Stack>
+              <Flex alignItems="center">
+                <Label>비밀번호 재입력</Label>
+                <Input
+                  type="password"
+                  style={{ flex: 1, marginLeft: '27px' }}
+                />
+              </Flex>
+            </Stack>
+          </Stack>
+          <Spacer size={40} />
+          <Flex justifyContent="flex-end">
+            <Button type="submit">비밀번호 변경</Button>
+          </Flex>
+        </Flex>
       </Flex>
     </Wrapper>
   );
