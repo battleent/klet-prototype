@@ -10,7 +10,29 @@ import Spacer from '@/components/Spacer';
 import Stack from '@/components/Stack';
 import Button from '@/components/Button';
 
-import User from '@/entities/User';
+interface MyProps {
+  email: string;
+  nickName: string;
+  password: string;
+  nation: string;
+  language: string;
+  exPassword: string;
+  newPassword: string;
+  klaytnAddress: string;
+}
+
+const UserData = [
+  {
+    email: 'lck@battleent.com',
+    nickName: 'LCK',
+    pasword: 'password',
+    nation: '한국',
+    language: '한글',
+    exPassword: 'asd',
+    newPassword: '',
+    klaytnAddress: '0xe3d92072d8b9a59a0427485a1b5f459271df',
+  },
+];
 
 const Profile = styled.div`
   width: 124px;
@@ -24,19 +46,9 @@ const BlueUnderLine = styled.div`
   text-decoration: underline #007aff;
 `;
 
-const UserData = [
-  {
-    email: 'lck@battleent.com',
-    id: '닉네임',
-    pasword: 'password',
-    nation: '한국',
-    language: '한글',
-    klaytnAddress: '0xe3d92072d8b9a59a0427485a1b5f459271df',
-  },
-];
-
-const My: React.VFC<User> = () => {
-  const { register, handleSubmit } = useForm();
+const My: React.VFC = () => {
+  const defaultValues = UserData[0];
+  const { register, handleSubmit } = useForm<MyProps>({ defaultValues });
   const onProfileSubmit = (data: {
     id: string;
     language: string;
@@ -67,7 +79,7 @@ const My: React.VFC<User> = () => {
           <Flex flexDirection="column" alignItems="center">
             <Profile />
             <Text fontSize="17px" fontWeight="bold" mt="24px" mb="10px">
-              {UserData[0].id}
+              {UserData[0].nickName}
             </Text>
             <BlueUnderLine>프로필 사진 바꾸기</BlueUnderLine>
           </Flex>
@@ -86,7 +98,7 @@ const My: React.VFC<User> = () => {
                 <Label>닉네임</Label>
                 <Input
                   style={{ flex: 1, marginLeft: '34px' }}
-                  {...register('id')}
+                  {...register('nickName')}
                 />
               </Flex>
             </Stack>
