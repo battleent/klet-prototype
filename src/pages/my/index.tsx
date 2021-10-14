@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-
 import { Flex, Text } from 'rebass';
+
+import useMedia from '@/hooks/useMedia';
+
 import Wrapper from '@/components/Wrapper';
 import Input from '@/components/Input';
 import Select from '@/components/Select';
@@ -47,15 +49,16 @@ const BlueUnderLine = styled.div`
 `;
 
 const My: React.VFC = () => {
+  const isDesktop = useMedia('desktop');
   const defaultValues = UserData[0];
   const { register, handleSubmit } = useForm<MyProps>({ defaultValues });
   const onProfileSubmit = (data: {
-    id: string;
+    nickName: string;
     language: string;
     nation: string;
   }) => {
     console.log(
-      `id: ${data.id}, lang: ${data.language}, nation: ${data.nation}`
+      `id: ${data.nickName}, lang: ${data.language}, nation: ${data.nation}`
     );
   };
   const onPasswordSubmit = (data: {
@@ -70,8 +73,8 @@ const My: React.VFC = () => {
     <Wrapper
       style={{
         justifyContent: 'center',
-        paddingTop: '80px',
-        paddingBottom: '80px',
+        paddingTop: isDesktop ? '80px' : '32px',
+        paddingBottom: '120px',
       }}
     >
       <Flex flexDirection="column" width={['', '372px']}>
@@ -129,16 +132,15 @@ const My: React.VFC = () => {
                 </Select>
               </Flex>
             </Stack>
-            <Button
-              style={{
-                marginLeft: 'auto',
-                marginTop: '48px',
-                marginBottom: '40px',
-                padding: '12px 18px',
-              }}
-            >
-              저장
-            </Button>
+
+            <Flex justifyContent="flex-end" mt={['48px', '40px']} mb="40px">
+              <Button
+                type="submit"
+                style={{ padding: '12px 18px', flex: isDesktop ? '' : 1 }}
+              >
+                저장
+              </Button>
+            </Flex>
           </Stack>
         </form>
 
@@ -153,12 +155,13 @@ const My: React.VFC = () => {
           <Text color="#343434" fontSize="18px" fontWeight="bold" mb="12px">
             Wallet
           </Text>
-          <Flex>
+          <Flex flexDirection={['column', 'row']}>
             <Label style={{ marginRight: '48px', whiteSpace: 'nowrap' }}>
               내 지갑 주소
             </Label>
             <Text
               style={{ wordBreak: 'break-all', textDecoration: 'underline' }}
+              mt={['5px', '0']}
             >
               {UserData[0].klaytnAddress}
             </Text>
@@ -178,38 +181,65 @@ const My: React.VFC = () => {
             <Spacer size={16} />
             <Stack gap={20}>
               <Stack>
-                <Flex alignItems="center">
+                <Flex
+                  alignItems={['flex-start', 'center']}
+                  flexDirection={['column', 'row']}
+                >
                   <Label>기존 비밀번호</Label>
                   <Input
                     type="password"
-                    style={{ flex: 1, marginLeft: '39px' }}
+                    style={{
+                      flex: 1,
+                      width: isDesktop ? '' : '100%',
+                      marginLeft: isDesktop ? '39px' : '0',
+                      marginTop: isDesktop ? '0' : '12px',
+                    }}
                     {...register('exPassword')}
                   />
                 </Flex>
               </Stack>
               <Stack>
-                <Flex alignItems="center">
+                <Flex
+                  alignItems={['flex-start', 'center']}
+                  flexDirection={['column', 'row']}
+                >
                   <Label>새 비밀번호</Label>
                   <Input
                     type="password"
-                    style={{ flex: 1, marginLeft: '52px' }}
+                    style={{
+                      flex: 1,
+                      width: isDesktop ? '' : '100%',
+                      marginLeft: isDesktop ? '52px' : '0',
+                      marginTop: isDesktop ? '0' : '12px',
+                    }}
                     {...register('newPassword')}
                   />
                 </Flex>
               </Stack>
               <Stack>
-                <Flex alignItems="center">
+                <Flex
+                  alignItems={['flex-start', 'center']}
+                  flexDirection={['column', 'row']}
+                >
                   <Label>비밀번호 재입력</Label>
                   <Input
                     type="password"
-                    style={{ flex: 1, marginLeft: '27px' }}
+                    style={{
+                      flex: 1,
+                      width: isDesktop ? '' : '100%',
+                      marginLeft: isDesktop ? '27px' : '0',
+                      marginTop: isDesktop ? '0' : '12px',
+                    }}
                   />
                 </Flex>
               </Stack>
             </Stack>
             <Spacer size={40} />
             <Flex justifyContent="flex-end">
-              <Button type="submit" style={{ padding: '12px 18px' }}>
+              <Button
+                type="submit"
+                style={{ padding: '12px 18px', flex: isDesktop ? '' : 1 }}
+              >
                 비밀번호 변경
               </Button>
             </Flex>
