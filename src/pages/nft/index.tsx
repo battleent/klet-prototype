@@ -9,6 +9,8 @@ import Spacer from '@/components/Spacer';
 import Grid from '@/components/Grid';
 import Card from '@/components/Card';
 
+import useNFT from '@/hooks/useNFT';
+
 const Sidebar = styled(Flex)`
   flex-flow: column;
   width: 244px;
@@ -42,67 +44,9 @@ const sortOption = [
   { id: 4, text: '제목 내림차순' },
 ];
 
-const cardData = [
-  {
-    id: 1,
-    tagName: 'COMMON',
-    name: 'Faker',
-    serviceName: 'LCK Do Dive',
-    number: 1,
-    issuedNumber: 1,
-  },
-  {
-    id: 2,
-    tagName: 'COMMON',
-    name: 'Clid',
-    serviceName: 'LCK Do Dive',
-    number: 2,
-    issuedNumber: 2,
-  },
-  {
-    id: 3,
-    tagName: 'COMMON',
-    name: 'Keria',
-    serviceName: 'LCK Do Dive',
-    number: 3,
-    issuedNumber: 3,
-  },
-  {
-    id: 4,
-    tagName: 'COMMON',
-    name: 'ShowMaker',
-    serviceName: 'LCK Do Dive',
-    number: 4,
-    issuedNumber: 4,
-  },
-  {
-    id: 5,
-    tagName: 'COMMON',
-    name: 'Ruler',
-    serviceName: 'LCK Do Dive',
-    number: 5,
-    issuedNumber: 5,
-  },
-  {
-    id: 6,
-    tagName: 'COMMON',
-    name: 'Khan',
-    serviceName: 'LCK Do Dive',
-    number: 6,
-    issuedNumber: 6,
-  },
-  {
-    id: 7,
-    tagName: 'COMMON',
-    name: 'Chovy',
-    serviceName: 'LCK Do Dive',
-    number: 7,
-    issuedNumber: 7,
-  },
-];
-
 const Nft: React.FC = () => {
   const router = useRouter();
+  const cardData = useNFT();
 
   const [menu, setMenu] = useState({ level: false, recent: false });
   const [showCard, setShowCard] = useState(cardData);

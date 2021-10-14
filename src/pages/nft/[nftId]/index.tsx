@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Flex, { Column } from '@/components/Flex';
 
+import useNFT from '@/hooks/useNFT';
+
 const TagBlock = styled.div`
   display: flex;
   justify-content: center;
@@ -33,70 +35,11 @@ const Grid = styled.div`
   grid-gap: 32px;
 `;
 
-const cardData = [
-  {
-    id: 1,
-    tagName: 'Common',
-    name: 'T1 Faker',
-    serviceName: '1',
-    number: 1,
-    issuedNumber: 13,
-  },
-  {
-    id: 2,
-    tagName: 'Rare',
-    name: 'GenG Clid',
-    serviceName: '2',
-    number: 2,
-    issuedNumber: 22,
-  },
-  {
-    id: 3,
-    tagName: 'Common',
-    name: 'T1 Keria',
-    serviceName: '3',
-    number: 3,
-    issuedNumber: 66,
-  },
-  {
-    id: 4,
-    tagName: 'Common',
-    name: 'DWG ShowMaker',
-    serviceName: '4',
-    number: 4,
-    issuedNumber: 15,
-  },
-  {
-    id: 5,
-    tagName: 'Rare',
-    name: 'GenG Ruler',
-    serviceName: '5',
-    number: 5,
-    issuedNumber: 92,
-  },
-  {
-    id: 6,
-    tagName: 'Common',
-    name: 'DWG Khan',
-    serviceName: '6',
-    number: 6,
-    issuedNumber: 101,
-  },
-  {
-    id: 7,
-    tagName: 'Rare',
-    name: 'HLE Chovy',
-    serviceName: '7',
-    number: 7,
-    issuedNumber: 100,
-  },
-];
-
 const NftItems: React.VFC = () => {
+  const cardData = useNFT();
   const router = useRouter();
   const { nftId } = router.query;
   const nftCard = cardData.find((item) => item.id === Number(nftId));
-  console.log(nftCard);
   return (
     <div style={{ width: '972px', margin: 'auto' }}>
       <Flex style={{ marginTop: '72px' }}>
