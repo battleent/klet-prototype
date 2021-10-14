@@ -12,30 +12,6 @@ import Spacer from '@/components/Spacer';
 import Stack from '@/components/Stack';
 import Button from '@/components/Button';
 
-interface MyProps {
-  email: string;
-  nickName: string;
-  password: string;
-  nation: string;
-  language: string;
-  exPassword: string;
-  newPassword: string;
-  klaytnAddress: string;
-}
-
-const UserData = [
-  {
-    email: 'lck@battleent.com',
-    nickName: 'LCK',
-    pasword: 'password',
-    nation: '한국',
-    language: '한글',
-    exPassword: 'asd',
-    newPassword: '',
-    klaytnAddress: '0xe3d92072d8b9a59a0427485a1b5f459271df',
-  },
-];
-
 const Profile = styled.div`
   width: 124px;
   height: 124px;
@@ -48,27 +24,47 @@ const BlueUnderLine = styled.div`
   text-decoration: underline #007aff;
 `;
 
+interface ProfileData {
+  email: string;
+  nickName: string;
+  language: string;
+  nation: string;
+  klaytnAddress: string;
+  password: string;
+  newPassword: string;
+}
+
+const UserData = [
+  {
+    nickName: 'LCK',
+    language: '한글',
+    nation: '한국',
+  },
+];
+
+const onProfileSubmit = (data: {
+  nickName: string;
+  language: string;
+  nation: string;
+}) => {
+  console.log(
+    `id: ${data.nickName}, lang: ${data.language}, nation: ${data.nation}`
+  );
+};
+
+const onPasswordSubmit = (data: { password: string; newPassword: string }) => {
+  console.log(
+    `old password : ${data.password}, new password: ${data.newPassword}`
+  );
+};
+
 const My: React.VFC = () => {
   const isDesktop = useMedia('desktop');
   const defaultValues = UserData[0];
-  const { register, handleSubmit } = useForm<MyProps>({ defaultValues });
-  const onProfileSubmit = (data: {
-    nickName: string;
-    language: string;
-    nation: string;
-  }) => {
-    console.log(
-      `id: ${data.nickName}, lang: ${data.language}, nation: ${data.nation}`
-    );
-  };
-  const onPasswordSubmit = (data: {
-    exPassword: string;
-    newPassword: string;
-  }) => {
-    console.log(
-      `old password : ${data.exPassword}, new password: ${data.newPassword}`
-    );
-  };
+  const { register, handleSubmit } = useForm<ProfileData>({ defaultValues });
+  const { register: registerPw, handleSubmit: handleSubmitPw } =
+    useForm<ProfileData>();
+
   return (
     <Wrapper
       style={{
@@ -92,7 +88,7 @@ const My: React.VFC = () => {
               <Flex sx={{ py: '8px' }}>
                 <Label>이메일</Label>
                 <Text style={{ flex: 1, marginLeft: '34px' }}>
-                  {UserData[0].email}
+                  lck@battleent.com
                 </Text>
               </Flex>
             </Stack>
@@ -163,11 +159,11 @@ const My: React.VFC = () => {
               style={{ wordBreak: 'break-all', textDecoration: 'underline' }}
               mt={['5px', '0']}
             >
-              {UserData[0].klaytnAddress}
+              0xe3d92072d8b9a59a0427485a1b5f459271df
             </Text>
           </Flex>
         </Flex>
-        <form onSubmit={handleSubmit(onPasswordSubmit)}>
+        <form onSubmit={handleSubmitPw(onPasswordSubmit)}>
           <Flex
             flexDirection="column"
             py="40px"
@@ -194,7 +190,7 @@ const My: React.VFC = () => {
                       marginLeft: isDesktop ? '39px' : '0',
                       marginTop: isDesktop ? '0' : '12px',
                     }}
-                    {...register('exPassword')}
+                    {...registerPw('password')}
                   />
                 </Flex>
               </Stack>
@@ -212,7 +208,7 @@ const My: React.VFC = () => {
                       marginLeft: isDesktop ? '52px' : '0',
                       marginTop: isDesktop ? '0' : '12px',
                     }}
-                    {...register('newPassword')}
+                    {...registerPw('newPassword')}
                   />
                 </Flex>
               </Stack>
