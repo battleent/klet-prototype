@@ -30,15 +30,20 @@ interface ProfileData {
   language: string;
   nation: string;
   klaytnAddress: string;
+}
+
+interface PasswordData {
   password: string;
   newPassword: string;
 }
 
 const UserData = [
   {
+    email: 'lck@battleent.com',
     nickName: 'LCK',
     language: '한글',
     nation: '한국',
+    klaytnAddress: '0xe3d92072d8b9a59a0427485a1b5f459271df',
   },
 ];
 
@@ -63,7 +68,7 @@ const My: React.VFC = () => {
   const defaultValues = UserData[0];
   const { register, handleSubmit } = useForm<ProfileData>({ defaultValues });
   const { register: registerPw, handleSubmit: handleSubmitPw } =
-    useForm<ProfileData>();
+    useForm<PasswordData>();
 
   return (
     <Wrapper
@@ -88,7 +93,7 @@ const My: React.VFC = () => {
               <Flex sx={{ py: '8px' }}>
                 <Label>이메일</Label>
                 <Text style={{ flex: 1, marginLeft: '34px' }}>
-                  lck@battleent.com
+                  {UserData[0].email}
                 </Text>
               </Flex>
             </Stack>
@@ -159,7 +164,7 @@ const My: React.VFC = () => {
               style={{ wordBreak: 'break-all', textDecoration: 'underline' }}
               mt={['5px', '0']}
             >
-              0xe3d92072d8b9a59a0427485a1b5f459271df
+              {UserData[0].klaytnAddress}
             </Text>
           </Flex>
         </Flex>
