@@ -8,6 +8,7 @@ import Wrapper from '@/components/Wrapper';
 import Spacer from '@/components/Spacer';
 import Grid from '@/components/Grid';
 import Card from '@/components/Card';
+import Sort from '@/components/Sort';
 
 import useNFT from '@/hooks/useNFT';
 
@@ -20,13 +21,6 @@ const Sidebar = styled(Flex)`
     padding: 12px 0;
     border-right: 0 none;
   }
-`;
-
-const DropDown = styled(Flex)<{ right?: string }>`
-  position: absolute;
-  flex-flow: column;
-  right: ${(props) => (props.right ? props.right : 0)};
-  top: 25px;
 `;
 
 const Input = styled.input`
@@ -48,14 +42,10 @@ const Nft: React.FC = () => {
   const router = useRouter();
   const cardData = useNFT();
 
-  const [menu, setMenu] = useState({ level: false, recent: false });
   const [showCard, setShowCard] = useState(cardData);
-  const [sortLevel, setSortLevel] = useState<string>();
+  const [sort, setSort] = useState(sortOption[0]);
 
   const { search } = router.query;
-  const ntfLevel = cardData.filter(
-    (item, index) => cardData.indexOf(item) === index
-  );
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchQuery = event.target.value.trim();
@@ -64,23 +54,13 @@ const Nft: React.FC = () => {
   };
 
   useEffect(() => {
-    if (search && sortLevel) {
-      return setShowCard(
-        cardData.filter(
-          (card) => card.name === search && card.tagName === sortLevel
-        )
-      );
-    }
     if (search) {
       return setShowCard(
         cardData.filter((card) => card.name.includes(search as string))
       );
     }
-    if (sortLevel) {
-      return setShowCard(cardData.filter((card) => card.tagName === sortLevel));
-    }
     return setShowCard(cardData);
-  }, [search, sortLevel]);
+  }, [search]);
 
   return (
     <Wrapper>
@@ -98,48 +78,13 @@ const Nft: React.FC = () => {
         >
           <Flex>
             <Input placeholder="검색" onChange={handleSearch} />
-            <div style={{ display: 'none ' }}>
-              <span
-                style={{ marginRight: '10px' }}
-                onClick={() =>
-                  setMenu((defaultMenu) => ({
-                    ...defaultMenu,
-                    level: !defaultMenu.level,
-                  }))
-                }
-              >
-                NFT 등급
-              </span>
-              <span
-                onClick={() =>
-                  setMenu((defaultMenu) => ({
-                    ...defaultMenu,
-                    recent: !defaultMenu.recent,
-                  }))
-                }
-              >
-                최신순부터
-              </span>
-              {menu.level && (
-                <DropDown right="100px">
-                  {ntfLevel.map((card) => (
-                    <div
-                      key={card.id}
-                      onClick={() => setSortLevel(card.tagName)}
-                    >
-                      {card.tagName}
-                    </div>
-                  ))}
-                </DropDown>
-              )}
-              {menu.recent && (
-                <DropDown>
-                  {sortOption.map((option) => (
-                    <div key={option.id}>{option.text}</div>
-                  ))}
-                </DropDown>
-              )}
-            </div>
+            <Flex sx={{ display: 'none' }}>
+              <Sort
+                options={sortOption}
+                defaultValue={sort}
+                onChange={setSort}
+              />
+            </Flex>
           </Flex>
 
           <Spacer size={40} />
