@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -10,7 +10,7 @@ import Grid from '@/components/Grid';
 import Card from '@/components/Card';
 import Sort from '@/components/Sort';
 
-import useNFT from '@/hooks/useNFT';
+import useSearch from '@/hooks/useSearch';
 
 const Sidebar = styled(Flex)`
   flex-flow: column;
@@ -40,27 +40,18 @@ const sortOption = [
 
 const Nft: React.FC = () => {
   const router = useRouter();
-  const cardData = useNFT();
-
-  const [showCard, setShowCard] = useState(cardData);
-  const [sort, setSort] = useState(sortOption[0]);
 
   const { search } = router.query;
+
+  const searchData = useSearch(search as string);
+
+  const [sort, setSort] = useState(sortOption[0]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchQuery = event.target.value.trim();
 
     router.push(`/nft?search=${encodeURIComponent(searchQuery)}`);
   };
-
-  useEffect(() => {
-    if (search) {
-      return setShowCard(
-        cardData.filter((card) => card.name.includes(search as string))
-      );
-    }
-    return setShowCard(cardData);
-  }, [search]);
 
   return (
     <Wrapper>
@@ -78,18 +69,18 @@ const Nft: React.FC = () => {
         >
           <Flex>
             <Input placeholder="검색" onChange={handleSearch} />
-            <Flex sx={{ display: 'none' }}>
+            <div style={{ display: 'none' }}>
               <Sort
                 options={sortOption}
                 defaultValue={sort}
                 onChange={setSort}
               />
-            </Flex>
+            </div>
           </Flex>
 
           <Spacer size={40} />
           <Grid>
-            {showCard.map((card) => (
+            {searchData.map((card) => (
               <Link key={card.id} href={`/nft/${card.id}`}>
                 <a>
                   <Card

@@ -1,4 +1,4 @@
-interface Card {
+export interface Card {
   id: number;
   tagName: string;
   name: string;
