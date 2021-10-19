@@ -1,8 +1,6 @@
-import useNFT from '@/hooks/useNFT';
-import { Card } from '@/hooks/useNFT';
+import { Card } from '@/hooks/useNFTList';
 
-function useSearch(search: string | undefined): Card[] {
-  const cardData = useNFT();
+function useSearch(cardData: Card[], search: string | undefined): Card[] {
   if (search) {
     return cardData.filter((card) => card.name.includes(search as string));
   }

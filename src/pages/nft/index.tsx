@@ -10,6 +10,7 @@ import Grid from '@/components/Grid';
 import Card from '@/components/Card';
 import Sort from '@/components/Sort';
 
+import useNFTList from '@/hooks/useNFTList';
 import useSearch from '@/hooks/useSearch';
 
 const Sidebar = styled(Flex)`
@@ -32,18 +33,19 @@ const Input = styled.input`
 `;
 
 const sortOption = [
-  { id: 1, text: '최신순' },
-  { id: 2, text: '오래된 순' },
-  { id: 3, text: '제목 오름차순' },
-  { id: 4, text: '제목 내림차순' },
+  { text: '최신순', value: 'recent' },
+  { text: '오래된 순', value: 'old' },
+  { text: '제목 오름차순', value: 'asc' },
+  { text: '제목 내림차순', value: 'des' },
 ];
 
 const Nft: React.FC = () => {
   const router = useRouter();
+  const cardData = useNFTList();
 
   const { search } = router.query;
 
-  const searchData = useSearch(search as string);
+  const searchedData = useSearch(cardData, search as string);
 
   const [sort, setSort] = useState(sortOption[0]);
 
@@ -80,7 +82,7 @@ const Nft: React.FC = () => {
 
           <Spacer size={40} />
           <Grid>
-            {searchData.map((card) => (
+            {searchedData.map((card) => (
               <Link key={card.id} href={`/nft/${card.id}`}>
                 <a>
                   <Card

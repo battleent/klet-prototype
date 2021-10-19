@@ -12,8 +12,8 @@ const DropDown = styled(Flex)<{ right?: string }>`
 `;
 
 type Option = {
-  id: number;
   text: string;
+  value: string;
 };
 
 interface SortProps {
@@ -42,7 +42,7 @@ const Sort: React.FC<SortProps> = ({
       {isOpened && (
         <DropDown>
           {options.map((option) => (
-            <div key={option.id} onClick={() => handleChange(option)}>
+            <div key={option.value} onClick={() => handleChange(option)}>
               {option.text}
             </div>
           ))}
