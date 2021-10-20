@@ -35,7 +35,7 @@ const sortOption = [
   { text: '최신순', value: 'recent' },
   { text: '오래된 순', value: 'old' },
   { text: '제목 오름차순', value: 'asc' },
-  { text: '제목 내림차순', value: 'des' },
+  { text: '제목 내림차순', value: 'desc' },
 ];
 
 const Nft: React.FC = () => {
