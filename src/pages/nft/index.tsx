@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { Flex, Text } from 'rebass';
@@ -10,7 +9,7 @@ import Grid from '@/components/Grid';
 import Card from '@/components/Card';
 import Sort from '@/components/Sort';
 
-import useNFTList from '@/hooks/useNFTList';
+import useNFTList, { NFTCard } from '@/hooks/useNFTList';
 import useSearch from '@/hooks/useSearch';
 
 const Sidebar = styled(Flex)`
@@ -40,20 +39,12 @@ const sortOption = [
 ];
 
 const Nft: React.FC = () => {
-  const router = useRouter();
   const cardData = useNFTList();
 
-  const { search } = router.query;
+  const { searchItem, handleSearch } = useSearch<NFTCard>();
 
-  const searchedData = useSearch(cardData, search as string);
-
+  const searchedData = searchItem(cardData);
   const [sort, setSort] = useState(sortOption[0]);
-
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const searchQuery = event.target.value.trim();
-
-    router.push(`/nft?search=${encodeURIComponent(searchQuery)}`);
-  };
 
   return (
     <Wrapper>

@@ -1,4 +1,4 @@
-export interface Card {
+export interface NFTCard {
   id: number;
   tagName: string;
   name: string;
@@ -7,7 +7,7 @@ export interface Card {
   issuedNumber: number;
 }
 
-function useNFTList(): Card[] {
+function useNFTList(): NFTCard[] {
   const nftCard = [
     {
       id: 1,
