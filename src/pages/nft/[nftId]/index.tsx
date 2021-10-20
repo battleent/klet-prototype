@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Flex, { Column } from '@/components/Flex';
 
-import useNFT from '@/hooks/useNFT';
+import useNFTList from '@/hooks/useNFTList';
 
 const TagBlock = styled.div`
   display: flex;
@@ -36,7 +36,7 @@ const Grid = styled.div`
 `;
 
 const NftItems: React.VFC = () => {
-  const cardData = useNFT();
+  const cardData = useNFTList();
   const router = useRouter();
   const { nftId } = router.query;
   const nftCard = cardData.find((item) => item.id === Number(nftId));

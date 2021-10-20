@@ -1,4 +1,4 @@
-interface Card {
+export interface NFTCard {
   id: number;
   tagName: string;
   name: string;
@@ -7,7 +7,7 @@ interface Card {
   issuedNumber: number;
 }
 
-function useNFT(): Card[] {
+function useNFTList(): NFTCard[] {
   const nftCard = [
     {
       id: 1,
@@ -69,4 +69,4 @@ function useNFT(): Card[] {
   return nftCard;
 }
 
-export default useNFT;
+export default useNFTList;

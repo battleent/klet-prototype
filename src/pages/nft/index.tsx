@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { Flex, Text } from 'rebass';
@@ -8,8 +7,10 @@ import Wrapper from '@/components/Wrapper';
 import Spacer from '@/components/Spacer';
 import Grid from '@/components/Grid';
 import Card from '@/components/Card';
+import Sort from '@/components/Sort';
 
-import useNFT from '@/hooks/useNFT';
+import useNFTList, { NFTCard } from '@/hooks/useNFTList';
+import useSearch from '@/hooks/useSearch';
 
 const Sidebar = styled(Flex)`
   flex-flow: column;
@@ -22,13 +23,6 @@ const Sidebar = styled(Flex)`
   }
 `;
 
-const DropDown = styled(Flex)<{ right?: string }>`
-  position: absolute;
-  flex-flow: column;
-  right: ${(props) => (props.right ? props.right : 0)};
-  top: 25px;
-`;
-
 const Input = styled.input`
   padding: 14px 24px;
   background-color: white;
@@ -38,49 +32,19 @@ const Input = styled.input`
 `;
 
 const sortOption = [
-  { id: 1, text: '최신순' },
-  { id: 2, text: '오래된 순' },
-  { id: 3, text: '제목 오름차순' },
-  { id: 4, text: '제목 내림차순' },
+  { text: '최신순', value: 'recent' },
+  { text: '오래된 순', value: 'old' },
+  { text: '제목 오름차순', value: 'asc' },
+  { text: '제목 내림차순', value: 'desc' },
 ];
 
 const Nft: React.FC = () => {
-  const router = useRouter();
-  const cardData = useNFT();
+  const cardData = useNFTList();
 
-  const [menu, setMenu] = useState({ level: false, recent: false });
-  const [showCard, setShowCard] = useState(cardData);
-  const [sortLevel, setSortLevel] = useState<string>();
+  const { searchItem, handleSearch } = useSearch<NFTCard>();
 
-  const { search } = router.query;
-  const ntfLevel = cardData.filter(
-    (item, index) => cardData.indexOf(item) === index
-  );
-
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const searchQuery = event.target.value.trim();
-
-    router.push(`/nft?search=${encodeURIComponent(searchQuery)}`);
-  };
-
-  useEffect(() => {
-    if (search && sortLevel) {
-      return setShowCard(
-        cardData.filter(
-          (card) => card.name === search && card.tagName === sortLevel
-        )
-      );
-    }
-    if (search) {
-      return setShowCard(
-        cardData.filter((card) => card.name.includes(search as string))
-      );
-    }
-    if (sortLevel) {
-      return setShowCard(cardData.filter((card) => card.tagName === sortLevel));
-    }
-    return setShowCard(cardData);
-  }, [search, sortLevel]);
+  const searchedData = searchItem(cardData);
+  const [sort, setSort] = useState(sortOption[0]);
 
   return (
     <Wrapper>
@@ -98,53 +62,18 @@ const Nft: React.FC = () => {
         >
           <Flex>
             <Input placeholder="검색" onChange={handleSearch} />
-            <div style={{ display: 'none ' }}>
-              <span
-                style={{ marginRight: '10px' }}
-                onClick={() =>
-                  setMenu((defaultMenu) => ({
-                    ...defaultMenu,
-                    level: !defaultMenu.level,
-                  }))
-                }
-              >
-                NFT 등급
-              </span>
-              <span
-                onClick={() =>
-                  setMenu((defaultMenu) => ({
-                    ...defaultMenu,
-                    recent: !defaultMenu.recent,
-                  }))
-                }
-              >
-                최신순부터
-              </span>
-              {menu.level && (
-                <DropDown right="100px">
-                  {ntfLevel.map((card) => (
-                    <div
-                      key={card.id}
-                      onClick={() => setSortLevel(card.tagName)}
-                    >
-                      {card.tagName}
-                    </div>
-                  ))}
-                </DropDown>
-              )}
-              {menu.recent && (
-                <DropDown>
-                  {sortOption.map((option) => (
-                    <div key={option.id}>{option.text}</div>
-                  ))}
-                </DropDown>
-              )}
+            <div style={{ display: 'none' }}>
+              <Sort
+                options={sortOption}
+                defaultValue={sort}
+                onChange={setSort}
+              />
             </div>
           </Flex>
 
           <Spacer size={40} />
           <Grid>
-            {showCard.map((card) => (
+            {searchedData.map((card) => (
               <Link key={card.id} href={`/nft/${card.id}`}>
                 <a>
                   <Card
