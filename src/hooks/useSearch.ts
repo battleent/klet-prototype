@@ -6,7 +6,7 @@ interface UseSearch<Item> {
 
 function useSearch<Item extends { name: string }>(): UseSearch<Item> {
   const router = useRouter();
-  const { search } = router.query;
+  const { search = '' } = router.query;
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchQuery = event.target.value.trim();
