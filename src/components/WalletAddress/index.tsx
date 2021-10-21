@@ -1,11 +1,11 @@
 import { Flex, Text } from 'rebass';
 
+import useUserData from '@/hooks/useUserData';
+import User from '@/entities/User';
+
 import Label from '@/components/Label';
 
-import useUserData from '@/hooks/useUserData';
-
-const WalletAddress = () => {
-  const userData = useUserData();
+const WalletAddress: React.FC<{ userData: User }> = ({ userData }) => {
   return (
     <Flex
       flexDirection="column"
@@ -26,7 +26,7 @@ const WalletAddress = () => {
           style={{ wordBreak: 'break-all', textDecoration: 'underline' }}
           mt={['5px', '0']}
         >
-          {userData[0].klaytnAddress}
+          {userData.klaytnAddress}
         </Text>
       </Flex>
     </Flex>

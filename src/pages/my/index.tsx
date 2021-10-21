@@ -1,6 +1,7 @@
 import { Flex } from 'rebass';
 
 import useMedia from '@/hooks/useMedia';
+import useUserData from '@/hooks/useUserData';
 
 import Wrapper from '@/components/Wrapper';
 import Spacer from '@/components/Spacer';
@@ -10,17 +11,9 @@ import WalletAddress from '@/components/WalletAddress';
 import PasswordForm from '@/components/PasswordForm';
 import Logout from '@/components/Logout';
 
-/**
-    <Wrapper>
-      <UserProfile />
-      <UserForm email={user.email} onSubmit={onUserFormSubmit}/>
-      <WalletAddress />
-      <PasswordForm />
-    </Wrapper>
- */
-
 const My: React.VFC = () => {
   const isDesktop = useMedia('desktop');
+  const userData = useUserData();
 
   return (
     <Wrapper
@@ -31,10 +24,10 @@ const My: React.VFC = () => {
       }}
     >
       <Flex flexDirection="column" width={['', '372px']}>
-        <UserProfile />
         <Spacer size={48} />
-        <UserForm />
-        <WalletAddress />
+        <UserProfile userData={userData} />
+        <UserForm userData={userData} />
+        <WalletAddress userData={userData} />
         <PasswordForm />
         <Logout />
       </Flex>

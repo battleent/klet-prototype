@@ -1,23 +1,23 @@
 import Timestamp from '@/entities/Timestamp';
 
 export default interface User {
-  userNumber: number;
-  userType: 'USER' | 'STAFF' | 'ADMIN';
+  userNumber?: number;
+  userType?: 'USER' | 'STAFF' | 'ADMIN';
   userStatus?: 'ACTIVE' | 'WARNING' | 'STOP' | 'WITHDRAWAL';
-  id?: string;
+  nickName?: string;
   email: string;
   emailVerified?: boolean;
   emailVerifiedTime?: Timestamp;
-  password: string;
+  password?: string;
   profile?: string;
   nation?: string;
   phoneNumber?: number;
-  isVerifiedSMS: boolean;
+  isVerifiedSMS?: boolean;
   timeVerifiedSMS?: Timestamp;
   language: string;
   klaytnAddress: string;
-  klaytnPrivateKey: string;
-  createdAt: number;
+  klaytnPrivateKey?: string;
+  createdAt?: number;
   withdrewAt?: number;
   signUpServiceId?: string;
 }

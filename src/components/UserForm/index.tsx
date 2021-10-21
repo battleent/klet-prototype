@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { Flex, Text } from 'rebass';
 
 import useMedia from '@/hooks/useMedia';
-import useUserData from '@/hooks/useUserData';
+import User from '@/entities/User';
 
 import Input from '@/components/Input';
 import Select from '@/components/Select';
@@ -28,10 +28,9 @@ const onProfileSubmit = (data: {
   );
 };
 
-const UserForm = () => {
+const UserForm: React.FC<{ userData: User }> = ({ userData }) => {
   const isDesktop = useMedia('desktop');
-  const userData = useUserData();
-  const defaultValues = userData[0];
+  const defaultValues = userData;
   const { register, handleSubmit } = useForm<ProfileData>({ defaultValues });
   return (
     <form onSubmit={handleSubmit(onProfileSubmit)}>
@@ -40,7 +39,7 @@ const UserForm = () => {
           <Flex sx={{ py: '8px' }}>
             <Label>이메일</Label>
             <Text style={{ flex: 1, marginLeft: '34px' }}>
-              {userData[0].email}
+              {userData.email}
             </Text>
           </Flex>
         </Stack>
