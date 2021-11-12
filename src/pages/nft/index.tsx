@@ -12,9 +12,6 @@ import Sort from '@/components/Sort';
 import useNFTList, { NFTCard } from '@/hooks/useNFTList';
 import useSearch from '@/hooks/useSearch';
 
-import { useQuery } from '@apollo/client';
-import useCountry from '@/graphql/useCountry';
-
 const Sidebar = styled(Flex)`
   flex-flow: column;
   width: 244px;
@@ -48,11 +45,6 @@ const Nft: React.FC = () => {
 
   const searchedData = searchItem(cardData);
   const [sort, setSort] = useState(sortOption[0]);
-
-  const { data } = useQuery(useCountry, {
-    variables: { code: 'KR' },
-  });
-  console.log(data);
 
   return (
     <Wrapper>
