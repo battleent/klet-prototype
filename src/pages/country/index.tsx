@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client';
-import useCountry, { CountryData, CountryVar } from '@/graphql/getCountry';
+import getCountry, { CountryData, CountryVar } from '@/graphql/getCountry';
 
 const Country: React.VFC = () => {
-  const { loading, data } = useQuery<CountryData, CountryVar>(useCountry, {
+  const { loading, data } = useQuery<CountryData, CountryVar>(getCountry, {
     variables: { code: 'KR' },
   });
   console.log(data);

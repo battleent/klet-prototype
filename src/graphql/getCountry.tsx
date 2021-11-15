@@ -18,7 +18,7 @@ export interface CountryVar {
   code: string;
 }
 
-const useCountry = gql`
+const getCountry = gql`
   query Country($code: ID!) {
     country(code: $code) {
       name
@@ -34,4 +34,4 @@ const useCountry = gql`
   }
 `;
 
-export default useCountry;
+export default getCountry;
