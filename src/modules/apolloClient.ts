@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 const Client = new ApolloClient({
-  uri: 'https://countries.trevorblades.com',
+  uri: 'https://api.spacex.land/graphql/',
   cache: new InMemoryCache(),
 });
 
