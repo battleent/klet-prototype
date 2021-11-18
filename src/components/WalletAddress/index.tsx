@@ -1,6 +1,5 @@
 import { Flex, Text } from 'rebass';
 
-import useUserData from '@/hooks/useUserData';
 import User from '@/entities/User';
 
 import Label from '@/components/Label';

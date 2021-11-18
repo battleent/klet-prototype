@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Flex, Text } from 'rebass';
 
-import useUserData from '@/hooks/useUserData';
 import User from '@/entities/User';
 
 const Profile = styled.div`
