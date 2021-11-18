@@ -66,6 +66,7 @@ function useNFTList(): NFTCard[] {
       issuedNumber: 100,
     },
   ];
+
   return nftCard;
 }
 
