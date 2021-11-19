@@ -38,13 +38,45 @@ const sortOption = [
   { text: '제목 내림차순', value: 'desc' },
 ];
 
-const Nft: React.FC = () => {
+const sortData = ({
+  data,
+  option,
+}: {
+  data: NFTCard[];
+  option: { text: string; value: string };
+}) => {
+  const sortedData = data;
+
+  if (option.value === 'recent') {
+    sortedData.sort(function (a, b) {
+      return a.id - b.id;
+    });
+  } else if (option.value === 'old') {
+    sortedData.sort(function (a, b) {
+      return b.id - a.id;
+    });
+  } else if (option.value === 'asc') {
+    sortedData.sort(function (a, b) {
+      return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+    });
+  } else if (option.value === 'desc') {
+    sortedData.sort(function (a, b) {
+      return a.name > b.name ? -1 : a.name > b.name ? 1 : 0;
+    });
+  }
+
+  return sortedData;
+};
+
+const Nft: React.FC<NFTCard> = () => {
   const cardData = useNFTList();
 
   const { searchItem, handleSearch } = useSearch<NFTCard>();
 
   const searchedData = searchItem(cardData);
   const [sort, setSort] = useState(sortOption[0]);
+
+  const sortedData = sortData({ data: searchedData, option: sort });
 
   return (
     <Wrapper>
@@ -62,7 +94,7 @@ const Nft: React.FC = () => {
         >
           <Flex>
             <Input placeholder="검색" onChange={handleSearch} />
-            <div style={{ display: 'none' }}>
+            <div>
               <Sort
                 options={sortOption}
                 defaultValue={sort}
@@ -73,7 +105,7 @@ const Nft: React.FC = () => {
 
           <Spacer size={40} />
           <Grid>
-            {searchedData.map((card) => (
+            {sortedData.map((card) => (
               <Link key={card.id} href={`/nft/${card.id}`}>
                 <a>
                   <Card
