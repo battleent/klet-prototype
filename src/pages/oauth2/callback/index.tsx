@@ -13,11 +13,11 @@ const Callback: React.FC = () => {
         if (response.status === 200) {
           return response.json();
         }
-        throw new Error('Error');
+        return console.log('error');
       })
       .then((response) => {
         localStorage.setItem('access_token', response?.access_token);
-        router.replace('/');
+        router.replace('/nft');
       });
   }, [code, router]);
 

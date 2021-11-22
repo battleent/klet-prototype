@@ -24,7 +24,7 @@ const DefaultHeader: React.FC = () => {
             justifyContent: 'space-between',
           }}
         >
-          <Link href="/nft">NFT Platform</Link>
+          <Link href="/">NFT Platform</Link>
           {accessToken ? (
             <Link href="/my">내 정보</Link>
           ) : (
