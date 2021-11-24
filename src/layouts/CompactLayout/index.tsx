@@ -14,6 +14,7 @@ const CompactLayout: React.FC = ({ children }) => {
         bg={['white', '#e5e5e5']}
       >
         <Flex
+          width={['100%', '40%']}
           flexDirection="column"
           p={['56px 24px', '40px']}
           backgroundColor="white"
