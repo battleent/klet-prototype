@@ -1,10 +1,9 @@
 {
-  "name": "lck-do-dive-web-prototype",
+  "name": "klet-prototype",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
-    "export": "next build && next export",
     "deploy": "aws s3 sync out s3://nft-platform-prototype",
     "prepare": "husky install",
     "pre-commit": "lint-staged",
