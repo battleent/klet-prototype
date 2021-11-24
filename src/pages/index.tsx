@@ -8,9 +8,9 @@ const Home: NextPage<{ accessToken: string | null }> = ({ accessToken }) => {
   useEffect(() => {
     if (accessToken) {
       router.replace('/nft');
-    } else {
-      router.push('/login/oauth2');
     }
+
+    router.push('/login');
   }, [accessToken, router]);
 
   return null;
