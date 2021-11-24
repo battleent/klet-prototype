@@ -1,13 +1,13 @@
 import { gql } from '@apollo/client';
 
-const useUser = gql`
-  query Users($where: users_bool_exp) {
-    users(where: $where) {
+const getUser = gql`
+  query getUser {
+    user @rest(type: "User", path: "users/me") {
       id
-      name
-      timestamp
+      userUid
+      username
     }
   }
 `;
 
-export default useUser;
+export default getUser;
