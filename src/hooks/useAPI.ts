@@ -1,26 +1,46 @@
+import { useState, useEffect } from 'react';
+
 const STAGE_API_HOST = process.env.NEXT_PUBLIC_API_HOST;
 
-const fetcher = async (url: RequestInfo, init?: RequestInit) => {
-  try {
-    const response = await fetch(`${STAGE_API_HOST}${url}`, init);
-    return response.json();
-  } catch (error) {
-    console.log(error);
-  }
+const fetcher = (url: RequestInfo, init?: RequestInit) => {
+  const response = fetch(`${STAGE_API_HOST}${url}`, init);
+  return response;
 };
 
-function useAPI<T>(url: RequestInfo): Promise<T | undefined> {
+interface APIResponse<T> {
+  data?: T;
+  isLoading: boolean;
+}
+
+function useAPI<T>(url: RequestInfo): APIResponse<T> {
+  const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
   const accessToken =
     typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
 
-  const response = fetcher(url, {
-    method: 'GET',
-    headers: new Headers({
-      Authorization: `Bearer ${accessToken}`,
-    }),
-  });
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetcher(url, {
+          method: 'GET',
+          headers: new Headers({
+            Authorization: `Bearer ${accessToken}`,
+          }),
+        });
+        const json = await response.json();
+        setData(json);
+      } catch (error) {
+        console.log(error);
+      }
+      setIsLoading(false);
+    };
 
-  return response;
+    fetchData();
+  }, [accessToken, url]);
+
+  return { data, isLoading };
 }
 
 export default useAPI;

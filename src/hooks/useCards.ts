@@ -4,10 +4,10 @@ import PaginatedResponse from '@/entities/PaginatedResponse';
 import useAPI from '@/hooks/useAPI';
 
 function useCards(): Card[] {
-  const data = useAPI<PaginatedResponse<Card>>('/cards');
-  console.log(data);
+  const { data, isLoading } = useAPI<PaginatedResponse<Card>>('/cards');
+  const isPrePared = data && !isLoading;
 
-  return data ? data.content : [];
+  return isPrePared ? data.content : [];
 }
 
 export default useCards;
