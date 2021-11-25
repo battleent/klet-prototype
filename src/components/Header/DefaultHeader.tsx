@@ -23,7 +23,7 @@ const DefaultHeader: React.FC = () => {
           }}
         >
           <Link href="/">NFT Platform</Link>
-          <Link href="/my">내 정보</Link>
+          <Link href="/user">내 정보</Link>
         </div>
       </Wrapper>
     </header>
