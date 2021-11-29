@@ -21,11 +21,15 @@ const Login: NextPageWithLayout = () => {
       <Spacer size={48} />
       <Stack gap={24}>
         <Button>
-          <a
-            href={`https://auth.klet.ninja/oauth/authorize?client_id=klet-client&redirect_uri=${origin}/oauth2/callback&response_type=code`}
-          >
-            로그인
-          </a>
+          {origin ? (
+            <a
+              href={`https://auth.klet.ninja/oauth/authorize?client_id=klet-client&redirect_uri=${origin}/oauth2/callback&response_type=code`}
+            >
+              로그인
+            </a>
+          ) : (
+            '로그인'
+          )}
         </Button>
         <Link href="/signup" passHref>
           <a
