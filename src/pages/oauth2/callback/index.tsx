@@ -7,7 +7,7 @@ const Callback: React.FC = () => {
 
   useEffect(() => {
     fetch(
-      `https://api-platform.klet.ninja/oauth2/callback?code=${code}&redirectUri=http://localhost:3000/oauth2/callback`
+      `https://api-platform.klet.ninja/oauth2/callback?code=${code}&redirectUri=https://platform.klet.ninja/oauth2/callback`
     )
       .then((response) => {
         if (response.status === 200) {
