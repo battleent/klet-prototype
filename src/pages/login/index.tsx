@@ -12,6 +12,7 @@ const Login: NextPageWithLayout = () => {
     typeof window !== 'undefined' && window.location.origin
       ? window.location.origin
       : '';
+
   return (
     <>
       <Text color="#343434" fontSize="32px" fontWeight="bold">
@@ -19,11 +20,12 @@ const Login: NextPageWithLayout = () => {
       </Text>
       <Spacer size={48} />
       <Stack gap={24}>
-        <Button
-          as="a"
-          href={`https://auth.klet.ninja/oauth/authorize?client_id=klet-client&redirect_uri=${origin}/oauth2/callback&response_type=code`}
-        >
-          로그인
+        <Button>
+          <a
+            href={`https://auth.klet.ninja/oauth/authorize?client_id=klet-client&redirect_uri=${origin}/oauth2/callback&response_type=code`}
+          >
+            로그인
+          </a>
         </Button>
         <Link href="/signup" passHref>
           <a
