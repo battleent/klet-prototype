@@ -5,9 +5,14 @@ const Callback: React.FC = () => {
   const router = useRouter();
   const { code } = router.query;
 
+  const origin =
+    typeof window !== 'undefined' && window.location.origin
+      ? window.location.origin
+      : '';
+
   useEffect(() => {
     fetch(
-      `https://api-platform.klet.ninja/oauth2/callback?code=${code}&redirectUri=https://platform.klet.ninja/oauth2/callback`
+      `https://api-platform.klet.ninja/oauth2/callback?code=${code}&redirectUri=${origin}/oauth2/callback`
     )
       .then((response) => {
         if (response.status === 200) {
