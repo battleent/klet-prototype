@@ -5,6 +5,7 @@ const UserMe: React.FC = () => {
   const { loading, error, data } = useQuery(getUser);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>No results found</div>;
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div>id : {data.user.id}</div>
