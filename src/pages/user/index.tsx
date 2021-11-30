@@ -8,9 +8,9 @@ const UserMe: React.FC = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <div>id : {data.user.id}</div>
-      <div>name : {data.user.username}</div>
-      <div>uid : {data.user.userUid}</div>
+      <div>id : {data.me.id}</div>
+      <div>name : {data.me.username}</div>
+      <div>uid : {data.me.userUid}</div>
     </div>
   );
 };

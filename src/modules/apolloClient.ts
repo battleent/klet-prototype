@@ -1,8 +1,9 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { RestLink } from 'apollo-link-rest';
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-const restLink = new RestLink({ uri: 'https://api-platform.klet.ninja/' });
+const httpLink = createHttpLink({
+  uri: 'https://api-platform.klet.ninja/graphql',
+});
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('access_token');
@@ -14,7 +15,7 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 const Client = new ApolloClient({
-  link: authLink.concat(restLink),
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
