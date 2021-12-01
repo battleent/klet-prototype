@@ -3,6 +3,7 @@ import { ApolloProvider } from '@apollo/client';
 import Client from '@/modules/apolloClient';
 import type { AppPropsWithLayout } from '@/layouts/types';
 import DefaultLayout from '@/layouts/DefaultLayout';
+import NeedLogin from '@/components/NeedLogin';
 
 import GlobalStyle from '@/styles/GlobalStyle';
 
@@ -13,7 +14,7 @@ const App: React.FC<AppPropsWithLayout> = ({ Component, pageProps }) => {
   return (
     <ApolloProvider client={Client}>
       <GlobalStyle />
-      {getLayout(<Component {...pageProps} />)}
+      <NeedLogin>{getLayout(<Component {...pageProps} />)}</NeedLogin>
     </ApolloProvider>
   );
 };
