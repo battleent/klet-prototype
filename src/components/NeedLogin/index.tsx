@@ -3,12 +3,19 @@ import { useRouter } from 'next/router';
 
 import useSession from '@/hooks/useSession';
 
-const NeedLogin: React.FC = ({ children }) => {
+interface NeedLoginProps {
+  checkLoginPath?: string;
+}
+
+const NeedLogin: React.FC<NeedLoginProps> = ({
+  checkLoginPath = '/login',
+  children,
+}) => {
   const router = useRouter();
   const { isLoaded, loggedOut } = useSession();
 
   useEffect(() => {
-    if (loggedOut && !isLoaded && router.pathname !== '/login') {
+    if (loggedOut && !isLoaded && router.pathname !== checkLoginPath) {
       router.push('/login');
     }
   }, [loggedOut, router]);
