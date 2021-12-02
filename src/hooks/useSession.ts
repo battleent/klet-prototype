@@ -1,23 +1,22 @@
 import { useQuery } from '@apollo/client';
 import getUser from '@/graphql/getUser';
 
-interface SesssionReturn {
-  accessToken: string | null;
+interface SessionReturn {
   loggedOut: boolean;
-  loading: boolean;
+  isLoaded: boolean;
 }
 
-function useSession(): SesssionReturn {
+function useSession(): SessionReturn {
   const { loading, data } = useQuery(getUser);
   const accessToken =
     typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
 
+  const isLoaded = Boolean(!loading && accessToken);
   const loggedOut = data === undefined || data?.me === null;
 
   return {
-    accessToken,
     loggedOut,
-    loading,
+    isLoaded,
   };
 }
 

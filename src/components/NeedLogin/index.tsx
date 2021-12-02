@@ -5,13 +5,13 @@ import useSession from '@/hooks/useSession';
 
 const NeedLogin: React.FC = ({ children }) => {
   const router = useRouter();
-  const { loading, loggedOut, accessToken } = useSession();
+  const { isLoaded, loggedOut } = useSession();
 
   useEffect(() => {
-    if (!loading && loggedOut && router.pathname !== '/login' && !accessToken) {
+    if (loggedOut && !isLoaded && router.pathname !== '/login') {
       router.push('/login');
     }
-  }, [accessToken, loading, loggedOut, router]);
+  }, [loggedOut, router]);
 
   return <>{children}</>;
 };
