@@ -1,6 +1,6 @@
+import { useEffect, useRef, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import getUser from '@/graphql/getUser';
-
 interface SessionReturn {
   loggedOut: boolean;
   isLoaded: boolean;
@@ -8,11 +8,25 @@ interface SessionReturn {
 
 function useSession(): SessionReturn {
   const { loading, data } = useQuery(getUser);
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const accessToken =
     typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
+  const tokenRef = useRef(accessToken);
 
-  const isLoaded = Boolean(!loading && accessToken);
-  const loggedOut = data === undefined || data?.me === null;
+  useEffect(() => {
+    if (accessToken && !loading) {
+      tokenRef.current = accessToken;
+      setIsLoaded(true);
+    }
+  }, [accessToken, loading]);
+
+  const isLoggedOut = () => {
+    if (loading) return undefined;
+    return data === undefined || data?.me === null;
+  };
+
+  const loggedOut = Boolean(isLoggedOut());
 
   return {
     loggedOut,
